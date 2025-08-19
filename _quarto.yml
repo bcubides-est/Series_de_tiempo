@@ -2,13 +2,13 @@ project:
   type: book
 
 book:
-  title: "CÁLCULO ACTUARIAL"
+  title: "SERIES DE TIEMPO"
   author: "Brayan Cubides"
-  repo-url: "https://github.com/bcubides-est/Actuarial"
+  repo-url: "https://github.com/bcubides-est/Series_de_tiempo"
   repo-branch: main
   favicon: logo.png
   description: "Material de cada Curso"
-  url: "/Actuarial/"
+  url: "/Series_de_tiempo/"
   page-navigation: true        # prev/next
   sidebar:
     tools:
@@ -44,9 +44,9 @@ format:
       light: cerulean #simplex 
       dark: cyborg
     css: custom.css
-    code-fold: false
+    code-fold: true
     toc-collapse: true  # Listas desplegables contraídas por defecto
-    toc-depth: 1
+    toc-depth: 2
     execute:
       output-dir: _book
     self-contained: false

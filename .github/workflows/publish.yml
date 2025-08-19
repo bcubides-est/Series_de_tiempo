@@ -12,9 +12,7 @@ permissions:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/r-lib/actions/setup-r:ubuntu-22.04
-      options: --user root
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,6 +21,9 @@ jobs:
 
       - name: Install Git LFS
         run: |
+          # Descargar e instalar Git LFS manualmente
+          curl -s https://packagecloud.io/install/repositories/github/git-lfs/config_file.list?os=Ubuntu&dist=noble&source=script | tee /etc/apt/sources.list.d/github_git-lfs.list
+          curl -s https://packagecloud.io/github/git-lfs/gpgkey | gpg --dearmor > /etc/apt/keyrings/github_git-lfs-archive-keyring.gpg
           apt-get update && apt-get install -y git-lfs
 
       - name: Setup R

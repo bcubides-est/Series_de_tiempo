@@ -15,8 +15,6 @@ self-contained: true
 Esta sección limpia el entorno, define la secuencia para *x* e *y*, define la función de la distribución normal bivariada y genera el gráfico 3D de la densidad.
 
 ```{r}
-rm(list=ls(all=TRUE))
-
 x<-seq(-6,6,length=40); y<-x
 
 # Función Normal Bivariada

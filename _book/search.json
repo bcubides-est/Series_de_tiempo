@@ -2,11 +2,11 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "MATERIAL DE PREGRADO",
+    "title": "SERIES DE TIEMPO",
     "section": "",
-    "text": "Bienvenido\nSelecciona un curso:\n\nACTUARIAL\nSERIES DE TIEMPO",
+    "text": "Bienvenido a la sección de Series de Tiempo\nSelecciona el tema que quieras ver.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Inicio</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>INTRODUCCIÓN</span>"
     ]
   },
   {
@@ -1129,78 +1129,71 @@
   {
     "objectID": "SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.html",
     "href": "SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.html",
-    "title": "7  Repaso y Simulación Serie",
+    "title": "2  Repaso y Simulación Serie",
     "section": "",
-    "text": "8 DISTRIBUCIÓN NORMAL BIVARIADA\nEsta sección limpia el entorno, define la secuencia para x e y, define la función de la distribución normal bivariada y genera el gráfico 3D de la densidad.\nrm(list=ls(all=TRUE))\n\nx&lt;-seq(-6,6,length=40); y&lt;-x\n\n# Función Normal Bivariada\nf&lt;-function(x,y,mu=c(0,0),s=c(1,0,1))\n{\n  mu1&lt;-mu[1]; mu2&lt;-mu[2]\n  s11&lt;-s[1]; s12&lt;-s[2]; s22&lt;-s[3]; rho&lt;-s12/(s11*s22)\n  term1&lt;-1/(2*pi*sqrt(s11*s22*(1-rho^2)))\n  term2&lt;--1/(2*(1-rho^2))\n  term3&lt;-(x-mu1)^2/s11\n  term4&lt;-(y-mu2)^2/s22\n  term5&lt;--2*rho*((x-mu1)*(y-mu2))/(sqrt(s11)*sqrt(s22))\n  term1*exp(term2*(term3+term4-term5))\n} \n\nz&lt;-outer(x,y,f,s=c(5,12.5,5)) # matriz de densidades\n\npersp(x, y, z, col=\"lightsalmon\", theta=30, phi=20, r=50, d=0.1, expand=0.5, ltheta=90,\n      main=\"Distribuci?n Normal Bivariada\", lphi=180, shade=0.3, ticktype=\"detailed\",\n      nticks=5, cex.axis=0.7, zlab='Densidad')\nmtext(expression(list(mu[x]==0, mu[y]==0, sigma[x]==5, sigma[y]==5,\n                      sigma[xy]==12.5, rho==0.5)), side=3)",
+    "text": "3 DISTRIBUCIÓN NORMAL BIVARIADA\nEsta sección limpia el entorno, define la secuencia para x e y, define la función de la distribución normal bivariada y genera el gráfico 3D de la densidad.\nCode\nrm(list=ls(all=TRUE))\n\nx&lt;-seq(-6,6,length=40); y&lt;-x\n\n# Función Normal Bivariada\nf&lt;-function(x,y,mu=c(0,0),s=c(1,0,1))\n{\n  mu1&lt;-mu[1]; mu2&lt;-mu[2]\n  s11&lt;-s[1]; s12&lt;-s[2]; s22&lt;-s[3]; rho&lt;-s12/(s11*s22)\n  term1&lt;-1/(2*pi*sqrt(s11*s22*(1-rho^2)))\n  term2&lt;--1/(2*(1-rho^2))\n  term3&lt;-(x-mu1)^2/s11\n  term4&lt;-(y-mu2)^2/s22\n  term5&lt;--2*rho*((x-mu1)*(y-mu2))/(sqrt(s11)*sqrt(s22))\n  term1*exp(term2*(term3+term4-term5))\n} \n\nz&lt;-outer(x,y,f,s=c(5,12.5,5)) # matriz de densidades\n\npersp(x, y, z, col=\"lightsalmon\", theta=30, phi=20, r=50, d=0.1, expand=0.5, ltheta=90,\n      main=\"Distribuci?n Normal Bivariada\", lphi=180, shade=0.3, ticktype=\"detailed\",\n      nticks=5, cex.axis=0.7, zlab='Densidad')\nmtext(expression(list(mu[x]==0, mu[y]==0, sigma[x]==5, sigma[y]==5,\n                      sigma[xy]==12.5, rho==0.5)), side=3)",
     "crumbs": [
-      "SERIES DE TIEMPO",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Repaso y Simulación Serie</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso y Simulación Serie</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.html#ruido-blanco",
     "href": "SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.html#ruido-blanco",
-    "title": "7  Repaso y Simulación Serie",
-    "section": "14.1 Ruido Blanco",
-    "text": "14.1 Ruido Blanco\n\nrt_RB &lt;- arima.sim(list(order=c(0,0,0)), n=1000 )\n# El primer 0 es el componente autorregresivo, el segundo 0 se explicará luego y el tercer 0 indica el orden de la media móvil (cantidad de datos usados)\npar(mfrow=c(1,1))\nplot(rt_RB, type=\"l\", main=\"Serie simulada 1\")\n\n\n\n\n\n\n\npar(mfrow=c(1,1))\nacf(rt_RB) # Función de autocorrelación muestral\n\n\n\n\n\n\n\n# Muestra la correlación entre -1 y 1; en un ruido blanco se espera que solo la autocorrelación en el retardo 0 sea significativa (valor 1)",
+    "title": "2  Repaso y Simulación Serie",
+    "section": "9.1 Ruido Blanco",
+    "text": "9.1 Ruido Blanco\n\n\nCode\nrt_RB &lt;- arima.sim(list(order=c(0,0,0)), n=1000 )\n# El primer 0 es el componente autorregresivo, el segundo 0 se explicará luego y el tercer 0 indica el orden de la media móvil (cantidad de datos usados)\npar(mfrow=c(1,1))\nplot(rt_RB, type=\"l\", main=\"Serie simulada 1\")\n\n\n\n\n\n\n\n\n\nCode\npar(mfrow=c(1,1))\nacf(rt_RB) # Función de autocorrelación muestral\n\n\n\n\n\n\n\n\n\nCode\n# Muestra la correlación entre -1 y 1; en un ruido blanco se espera que solo la autocorrelación en el retardo 0 sea significativa (valor 1)",
     "crumbs": [
-      "SERIES DE TIEMPO",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Repaso y Simulación Serie</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso y Simulación Serie</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.html#random-walk-caminata-aleatoria",
     "href": "SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.html#random-walk-caminata-aleatoria",
-    "title": "7  Repaso y Simulación Serie",
-    "section": "14.2 Random Walk (Caminata Aleatoria)",
-    "text": "14.2 Random Walk (Caminata Aleatoria)\n\nset.seed(154) # Para que puedas reproducir los resultados\nw = rnorm(200); x = cumsum(w) # dos comandos en una línea\nwd = w + .2; xd = cumsum(wd)\nplot.ts(xd, ylim=c(-5,55), main=\"random walk\", ylab='') # Con drift y sin drift\nlines(x, col=4); abline(h=0, col=4, lty=2); abline(a=0, b=.2, lty=2)",
+    "title": "2  Repaso y Simulación Serie",
+    "section": "9.2 Random Walk (Caminata Aleatoria)",
+    "text": "9.2 Random Walk (Caminata Aleatoria)\n\n\nCode\nset.seed(154) # Para que puedas reproducir los resultados\nw = rnorm(200); x = cumsum(w) # dos comandos en una línea\nwd = w + .2; xd = cumsum(wd)\nplot.ts(xd, ylim=c(-5,55), main=\"random walk\", ylab='') # Con drift y sin drift\nlines(x, col=4); abline(h=0, col=4, lty=2); abline(a=0, b=.2, lty=2)",
     "crumbs": [
-      "SERIES DE TIEMPO",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Repaso y Simulación Serie</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso y Simulación Serie</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.html#modelo-ar2",
     "href": "SERIES_DE_TIEMPO/P0_Repaso_y_Graf_ST_Quarto.html#modelo-ar2",
-    "title": "7  Repaso y Simulación Serie",
-    "section": "14.3 Modelo AR(2)",
-    "text": "14.3 Modelo AR(2)\n\nx &lt;- arima.sim(list(ar = c(1, -0.9)), n=500 )\npar(mfrow=c(1,1))\nplot.ts(x, main=\"autoregression\")\n\n\n\n\n\n\n\n# Si es un proceso autorregresivo puro, se espera que las autocorrelaciones decrezcan progresivamente,\n# por lo cual la serie no será estacionaria.",
+    "title": "2  Repaso y Simulación Serie",
+    "section": "9.3 Modelo AR(2)",
+    "text": "9.3 Modelo AR(2)\n\n\nCode\nx &lt;- arima.sim(list(ar = c(1, -0.9)), n=500 )\npar(mfrow=c(1,1))\nplot.ts(x, main=\"autoregression\")\n\n\n\n\n\n\n\n\n\nCode\n# Si es un proceso autorregresivo puro, se espera que las autocorrelaciones decrezcan progresivamente,\n# por lo cual la serie no será estacionaria.",
     "crumbs": [
-      "SERIES DE TIEMPO",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Repaso y Simulación Serie</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Repaso y Simulación Serie</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P1_ACF_muestral_Quarto.html",
     "href": "SERIES_DE_TIEMPO/P1_ACF_muestral_Quarto.html",
-    "title": "8  ACF - Ruido Blanco - Drift",
+    "title": "3  ACF - Ruido Blanco - Drift",
     "section": "",
-    "text": "8.1 ACF muestral de un ruido blanco wt\nEl Autocorrelograma decae rápidamente, por lo cual no hay estacionariedad\nrm(list = ls(all = TRUE))\n\n# Simula un modelo ARIMA(p,d,q) si d=0, es un ARMA(p,q)\nrt_RB &lt;- arima.sim(list(order = c(0,0,0)), n = 1000 )\npar(mfrow = c(1,2))\nplot(rt_RB, type = \"l\", main = \"Serie simulada ruido blanco wt\")\nacf(rt_RB, lag.max = 40)",
+    "text": "3.1 ACF muestral de un ruido blanco wt\nEl Autocorrelograma decae rápidamente, por lo cual no hay estacionariedad\nCode\nrm(list = ls(all = TRUE))\n\n# Simula un modelo ARIMA(p,d,q) si d=0, es un ARMA(p,q)\nrt_RB &lt;- arima.sim(list(order = c(0,0,0)), n = 1000 )\npar(mfrow = c(1,2))\nplot(rt_RB, type = \"l\", main = \"Serie simulada ruido blanco wt\")\nacf(rt_RB, lag.max = 40)",
     "crumbs": [
-      "SERIES DE TIEMPO",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ACF - Ruido Blanco - Drift</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ACF - Ruido Blanco - Drift</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P1_ACF_muestral_Quarto.html#acf-muestral-de-una-caminata-aleatoria",
     "href": "SERIES_DE_TIEMPO/P1_ACF_muestral_Quarto.html#acf-muestral-de-una-caminata-aleatoria",
-    "title": "8  ACF - Ruido Blanco - Drift",
-    "section": "8.2 ACF muestral de una Caminata Aleatoria",
-    "text": "8.2 ACF muestral de una Caminata Aleatoria\n\n8.2.1 Generación de la serie con y sin drift\n\nset.seed(154) # para reproducir los resultados\nw  &lt;- rnorm(200); x  &lt;- cumsum(w)   # dos comandos en una sola línea\nwd &lt;- w + 0.2;    xd &lt;- cumsum(wd)\npar(mfrow = c(1,1))\nplot.ts(xd, ylim = c(-5,55), main = \"Random walk\", ylab = \"\")\nlines(x, col = 4)\nabline(h = 0, col = 4, lty = 2)\nabline(a = 0, b = 0.2, lty = 2)\n\n\n\n\n\n\n\n\n\n\n8.2.2 ACF de la caminata aleatoria sin drift\n\npar(mfrow = c(2,2))\nplot.ts(x, ylim = c(-5,55), main = \"Random walk sin drift\", ylab = \"\", col = 4)\nabline(h = 0, col = 4, lty = 2)\nacf(x, lag.max = 40)\n\n\n\n\n\n\n\n\n\n\n8.2.3 ACF de la caminata aleatoria con drift\n\nplot.ts(xd, main = \"Random walk con drift\", ylab = \"\")\nabline(a = 0, b = 0.2, lty = 2)\n\n\n\n\n\n\n\nacf(xd, lag.max = 40)",
+    "title": "3  ACF - Ruido Blanco - Drift",
+    "section": "3.2 ACF muestral de una Caminata Aleatoria",
+    "text": "3.2 ACF muestral de una Caminata Aleatoria\n\n3.2.1 Generación de la serie con y sin drift\n\n\nCode\nset.seed(154) # para reproducir los resultados\nw  &lt;- rnorm(200); x  &lt;- cumsum(w)   # dos comandos en una sola línea\nwd &lt;- w + 0.2;    xd &lt;- cumsum(wd)\npar(mfrow = c(1,1))\nplot.ts(xd, ylim = c(-5,55), main = \"Random walk\", ylab = \"\")\nlines(x, col = 4)\nabline(h = 0, col = 4, lty = 2)\nabline(a = 0, b = 0.2, lty = 2)\n\n\n\n\n\n\n\n\n\n\n\n3.2.2 ACF de la caminata aleatoria sin drift\n\n\nCode\npar(mfrow = c(2,2))\nplot.ts(x, ylim = c(-5,55), main = \"Random walk sin drift\", ylab = \"\", col = 4)\nabline(h = 0, col = 4, lty = 2)\nacf(x, lag.max = 40)\n\n\n\n\n\n\n\n\n\n\n\n3.2.3 ACF de la caminata aleatoria con drift\n\n\nCode\nplot.ts(xd, main = \"Random walk con drift\", ylab = \"\")\nabline(a = 0, b = 0.2, lty = 2)\n\n\n\n\n\n\n\n\n\nCode\nacf(xd, lag.max = 40)",
     "crumbs": [
-      "SERIES DE TIEMPO",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ACF - Ruido Blanco - Drift</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ACF - Ruido Blanco - Drift</span>"
     ]
   },
   {
     "objectID": "SERIES_DE_TIEMPO/P1_ACF_muestral_Quarto.html#acf-de-una-serie-con-estacionalidad-airpassengers",
     "href": "SERIES_DE_TIEMPO/P1_ACF_muestral_Quarto.html#acf-de-una-serie-con-estacionalidad-airpassengers",
-    "title": "8  ACF - Ruido Blanco - Drift",
-    "section": "8.3 ACF de una serie con estacionalidad (AirPassengers)",
-    "text": "8.3 ACF de una serie con estacionalidad (AirPassengers)\nSe logra ver tendencia en el Autocorrelograma\n\npar(mfrow = c(1,2))\nplot(AirPassengers)\nacf(AirPassengers, lag.max = 48)",
+    "title": "3  ACF - Ruido Blanco - Drift",
+    "section": "3.3 ACF de una serie con estacionalidad (AirPassengers)",
+    "text": "3.3 ACF de una serie con estacionalidad (AirPassengers)\nSe logra ver tendencia en el Autocorrelograma\n\n\nCode\npar(mfrow = c(1,2))\nplot(AirPassengers)\nacf(AirPassengers, lag.max = 48)",
     "crumbs": [
-      "SERIES DE TIEMPO",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ACF - Ruido Blanco - Drift</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ACF - Ruido Blanco - Drift</span>"
     ]
   },
   {
@@ -1344,6 +1337,46 @@
     "crumbs": [
       "SERIES DE TIEMPO",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Causal y Estacionario</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/Tarea_1_ACF_Quarto.html",
+    "href": "SERIES_DE_TIEMPO/Tarea_1_ACF_Quarto.html",
+    "title": "5  ACF en AR(p) y MA(q)",
+    "section": "",
+    "text": "5.1 Simulación y cálculo de ACF para n = 500 y n = 50\nCode\n# Serie MA(3) con n = 500\nset.seed(1)\nx1 &lt;- filter(rnorm(500 + 2), filter = rep(1/3, 3), sides = 2)\nx1 &lt;- x1[2:(500 + 1)]\n\n# Serie MA(3) con n = 50\nx2 &lt;- filter(rnorm(50 + 2), filter = rep(1/3, 3), sides = 2)\nx2 &lt;- x2[2:(50 + 1)]\n\npar(mfrow = c(1,2))\nplot.ts(x1, main = \"MA(3) simulada, n = 500\", xlab = \"Tiempo\", ylab = \"Valor de la serie\")\nplot.ts(x2, main = \"MA(3) simulada, n = 50\", xlab = \"Tiempo\", ylab = \"Valor de la serie\")",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>ACF en AR(p) y MA(q)</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/Tarea_1_ACF_Quarto.html#función-teórica-de-la-acf-para-ma3",
+    "href": "SERIES_DE_TIEMPO/Tarea_1_ACF_Quarto.html#función-teórica-de-la-acf-para-ma3",
+    "title": "5  ACF en AR(p) y MA(q)",
+    "section": "5.2 Función teórica de la ACF para MA(3)",
+    "text": "5.2 Función teórica de la ACF para MA(3)\n\\[\n\\rho(h) =\n\\begin{cases}\n1, & h = 0,\\\\[6pt]\n\\frac{2}{3}, & |h| = 1,\\\\[6pt]\n\\frac{1}{3}, & |h| = 2,\\\\[6pt]\n0, & |h| &gt; 2.\n\\end{cases}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>ACF en AR(p) y MA(q)</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/Tarea_1_ACF_Quarto.html#cálculo-y-comparación-de-acfs-muestrales",
+    "href": "SERIES_DE_TIEMPO/Tarea_1_ACF_Quarto.html#cálculo-y-comparación-de-acfs-muestrales",
+    "title": "5  ACF en AR(p) y MA(q)",
+    "section": "5.3 Cálculo y comparación de ACFs muestrales",
+    "text": "5.3 Cálculo y comparación de ACFs muestrales\n\n\nCode\n# ACF muestral comparativa\npar(mfrow = c(1,2))\nacf(x1, lag.max = 20, main = \"ACF muestral MA(3), n = 500\", xlab = \"Rezago\", ylab = \"ACF\")\nacf(x2, lag.max = 20, main = \"ACF muestral MA(3), n = 50\", xlab = \"Rezago\", ylab = \"ACF\")\n\n\n\n\n\n\n\n\n\nCode\nacf_x1 &lt;- acf(x1, lag.max = 20, plot = FALSE)$acf\nacf_x2 &lt;- acf(x2, lag.max = 20, plot = FALSE)$acf\nrho_teo &lt;- c(1, 2/3, 1/3, rep(0, 18))\n\n# Construir tabla comparativa\nAutocorrelaciones &lt;- data.frame(\n  Rezago            = 0:20,\n  ACF500_Estimada   = round(acf_x1,   4),\n  ACF50_Estimada    = round(acf_x2,   4),\n  ACF_Teórica       = round(rho_teo,  4)\n)\nhead(Autocorrelaciones, 6)\n\n\n  Rezago ACF500_Estimada ACF50_Estimada ACF_Teórica\n1      0          1.0000         1.0000      1.0000\n2      1          0.6390         0.6337      0.6667\n3      2          0.2893         0.3215      0.3333\n4      3         -0.0575         0.0830      0.0000\n5      4         -0.0477         0.0580      0.0000\n6      5         -0.0234        -0.0354      0.0000",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>ACF en AR(p) y MA(q)</span>"
+    ]
+  },
+  {
+    "objectID": "SERIES_DE_TIEMPO/Tarea_1_ACF_Quarto.html#interpretación-de-resultados",
+    "href": "SERIES_DE_TIEMPO/Tarea_1_ACF_Quarto.html#interpretación-de-resultados",
+    "title": "5  ACF en AR(p) y MA(q)",
+    "section": "5.4 Interpretación de resultados",
+    "text": "5.4 Interpretación de resultados\nPara rezagos (h=0, , ), los valores muestrales de ambas series (n=500 y n=50) están muy cercanos a los valores teóricos ((1, 2/3, 1/3)). Sin embargo, al observar los autocorrelogramas se observa lo siguiente:\n\nMuestra grande (n = 500): las bandas de confianza son más estrechas y la variabilidad de los coeficientes para (|h|&gt;2) es menor, manteniéndose cerca de cero.\n\nMuestra pequeña (n = 50): las bandas de confianza se amplían y los coeficientes de autocorrelación muestran mayor dispersión, por lo que para (|h|&gt;2) aparecen valores más alejados de cero.\n\nEste comportamiento refleja que con mayor tamaño de muestra la estimación de la ACF es más estable y confiable, especialmente para rezagos fuera del orden del modelo MA(3).",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>ACF en AR(p) y MA(q)</span>"
     ]
   }
 ]

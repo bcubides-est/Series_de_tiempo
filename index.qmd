@@ -1,0 +1,12 @@
+---
+title: "INTRODUCCIÓN"
+code-tools: true
+lightbox: true
+toc: true
+toc-location: right
+#number-sections: true
+---
+
+# Bienvenido a la sección de Series de Tiempo {.unnumbered}
+
+Selecciona el tema que quieras ver.

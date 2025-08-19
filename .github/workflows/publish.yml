@@ -1,28 +1,16 @@
-name: Publish Quarto Book
+name: Publish Book Series
 
 on:
   push:
     branches: [ main ]
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 jobs:
   build-deploy:
-    container:
-      image: ghcr.io/r-lib/actions/setup-r:ubuntu-22.04
-      options: --user root
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Install Git LFS
-        run: |
-          apt-get update && apt-get install -y git-lfs
+        uses: actions/checkout@v3
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -31,10 +19,8 @@ jobs:
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          version: '1.7.33'
 
-      - name: Install renv packages
+      - name: Install R packages (si usas renv)
         uses: r-lib/actions/setup-renv@v2
 
       - name: Render Book

@@ -11,20 +11,18 @@ permissions:
 
 jobs:
   build-deploy:
+    # Especifica la máquina runner en la que se ejecutará el trabajo
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Add this step to install Git LFS
       - name: Install Git LFS
         run: |
-          curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
-          apt-get install -y git-lfs
-          git lfs install
+          apt-get update && apt-get install -y git-lfs
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2

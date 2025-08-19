@@ -11,9 +11,10 @@ permissions:
 
 jobs:
   build-deploy:
-    # Especifica la máquina runner en la que se ejecutará el trabajo
     runs-on: ubuntu-latest
-
+    container:
+      image: ghcr.io/r-lib/actions/setup-r:ubuntu-22.04
+      options: --user root
     steps:
       - name: Checkout
         uses: actions/checkout@v4

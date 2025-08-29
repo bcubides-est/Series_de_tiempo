@@ -531,7 +531,7 @@ La prueba ADF considera: <span class="math display">\[
     Augmented Dickey-Fuller Test
 
 data:  arimaej_raiz_unit
-Dickey-Fuller = -2.3219, Lag order = 5, p-value = 0.4412
+Dickey-Fuller = -1.974, Lag order = 5, p-value = 0.587
 alternative hypothesis: stationary</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba KPSS (Ho: estacionariedad vs Ha: raiz unitaria)</span></span>
@@ -545,7 +545,7 @@ p-value</code></pre>
     KPSS Test for Level Stationarity
 
 data:  arimaej_raiz_unit
-KPSS Level = 1.3082, Truncation lag parameter = 4, p-value = 0.01</code></pre>
+KPSS Level = 2.5703, Truncation lag parameter = 4, p-value = 0.01</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba Phillips-Perron (Ho: raiz unitaria vs Ha: estacionariedad)</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">pp.test</span>(arimaej_raiz_unit)        <span class="co"># p.valor&gt;0.05 ⇒ no rechaza Ho</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -554,8 +554,8 @@ KPSS Level = 1.3082, Truncation lag parameter = 4, p-value = 0.01</code></pre>
     Phillips-Perron Unit Root Test
 
 data:  arimaej_raiz_unit
-Dickey-Fuller Z(alpha) = -4.0553, Truncation lag parameter = 4, p-value
-= 0.8825
+Dickey-Fuller Z(alpha) = -4.1726, Truncation lag parameter = 4, p-value
+= 0.8758
 alternative hypothesis: stationary</code></pre>
 </div>
 </div>

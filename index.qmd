@@ -9,4 +9,4 @@ toc-location: right
 
 # Bienvenido a la sección de Series de Tiempo {.unnumbered}
 
-Selecciona el tema que quieras ver.
+Selecciona el tema que quieras ver

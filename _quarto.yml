@@ -44,7 +44,7 @@ format:
       light: cerulean #simplex 
       dark: cyborg
     css: custom.css
-    code-fold: true
+    code-fold: false
     toc-collapse: true  # Listas desplegables contraídas por defecto
     toc-depth: 2
     execute:

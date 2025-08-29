@@ -10,13 +10,11 @@ lightbox: true
 self-contained: false  
 ---
 
-## ACF muestral de un ruido blanco wt
+## ACF muestral de un ruido blanco wt(,)
 
 El Autocorrelograma decae rápidamente, por lo cual no hay estacionariedad
 
 ```{r}
-rm(list = ls(all = TRUE))
-
 # Simula un modelo ARIMA(p,d,q) si d=0, es un ARMA(p,q)
 rt_RB <- arima.sim(list(order = c(0,0,0)), n = 1000 )
 par(mfrow = c(1,2))

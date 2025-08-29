@@ -456,7 +456,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">SARIMA(p,d,q)(P,D,Q)_[s]</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">SARIMA(p,d,q)(P,D,Q)_[s]</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -480,11 +480,8 @@ window.Quarto = {
 
 
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd("C:/Users/cubid/Desktop/QUARTO - MATERIAS UNAL/9 SERIES DE TIEMPO/Lesson01")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <section id="ejercicio-de-simulación-sarima" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="ejercicio-de-simulación-sarima"><span class="header-section-number">10.1</span> Ejercicio de Simulación SARIMA</h2>
@@ -494,13 +491,10 @@ Recordemos el operador de diferencia estacional de periodo (s): <span class="mat
 SARIMA((p,d,q),(P,D,Q)[s]): \\ \Phi(B^s),\phi(B),(1 - B)^d,(1 -
 B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>(<span class="at">all=</span><span class="cn">TRUE</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(urca); <span class="fu">library</span>(forecast); <span class="fu">library</span>(tseries)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest); <span class="fu">library</span>(uroot); <span class="fu">library</span>(fUnitRoots)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sarima); <span class="fu">library</span>(aTSA); <span class="fu">require</span>(<span class="st">"PolynomF"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <hr>
 </section>
@@ -508,8 +502,6 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <h2 data-number="10.2" class="anchored" data-anchor-id="sar1-estacional-00010012"><span class="header-section-number">10.2</span> 1. SAR(1) estacional ((0,0,0)(1,0,0)[12])</h2>
 <p>Simulamos <span class="math display">\[X_t = \Phi*1,X*{t-12} + w_t,\quad \Phi\_1=0.9,\]</span> y comparamos su ACF/PACF teórica y muestral.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">666</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>phi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">11</span>), .<span class="dv">9</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sAR <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">ar=</span>phi), <span class="at">n=</span><span class="dv">37</span>), <span class="at">frequency=</span><span class="dv">12</span>)</span>
@@ -529,7 +521,6 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ACF,  <span class="at">type=</span><span class="st">"h"</span>, <span class="at">xlab=</span><span class="st">"Rezago"</span>, <span class="at">main=</span><span class="st">"ACF teórica"</span>,  <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">1</span>,<span class="dv">1</span>)); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(PACF, <span class="at">type=</span><span class="st">"h"</span>, <span class="at">xlab=</span><span class="st">"Rezago"</span>, <span class="at">main=</span><span class="st">"PACF teórica"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">1</span>,<span class="dv">1</span>)); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -547,8 +538,6 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <h2 data-number="10.3" class="anchored" data-anchor-id="sma1-estacional-00000112"><span class="header-section-number">10.3</span> 2. SMA(1) estacional ((0,0,0)(0,0,1)[12])</h2>
 <p>Simulamos $$X_t = w_t + *1,w*{t-12},_1=0.7.$$</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">11</span>), .<span class="dv">7</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sMA <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">12</span>), <span class="at">ma=</span>theta), <span class="at">n=</span><span class="dv">37</span>), <span class="at">frequency=</span><span class="dv">12</span>)</span>
@@ -564,7 +553,6 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ACF,  <span class="at">type=</span><span class="st">"h"</span>, <span class="at">xlab=</span><span class="st">"Rezago"</span>, <span class="at">main=</span><span class="st">"ACF teórica"</span>,  <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">1</span>,<span class="dv">1</span>)); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(PACF, <span class="at">type=</span><span class="st">"h"</span>, <span class="at">xlab=</span><span class="st">"Rezago"</span>, <span class="at">main=</span><span class="st">"PACF teórica"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">1</span>,<span class="dv">1</span>)); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -581,8 +569,6 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <h2 data-number="10.4" class="anchored" data-anchor-id="raíz-unitaria-estacional"><span class="header-section-number">10.4</span> 3. Raíz unitaria estacional</h2>
 <p>Simulamos un proceso con una raíz estacional unitaria ((D=1)) y verificamos diferencias:</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">sim_sarima</span>(<span class="at">n=</span><span class="dv">144</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">model=</span><span class="fu">list</span>(<span class="at">iorder=</span><span class="dv">0</span>, <span class="at">siorder=</span><span class="dv">1</span>, <span class="at">nseasons=</span><span class="dv">12</span>, <span class="at">sigma2=</span><span class="dv">1</span>),</span>
@@ -591,7 +577,6 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,    <span class="at">main=</span><span class="st">"Serie con raíz estacional"</span>)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x, <span class="at">lag.max=</span><span class="dv">36</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -599,13 +584,10 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monthplot</span>(x, <span class="at">main=</span><span class="st">"Monthplot original"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Número de diferencias estacionales necesarias</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nsdiffs</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
@@ -618,13 +600,10 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Dx <span class="ot">&lt;-</span> <span class="fu">diff</span>(x, <span class="at">lag=</span><span class="dv">12</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Dx,   <span class="at">main=</span><span class="st">"Primera diferencia estacional"</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(Dx, <span class="at">lag.max=</span><span class="dv">36</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -632,11 +611,8 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monthplot</span>(Dx)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nsdiffs</span>(Dx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -657,8 +633,6 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <h2 data-number="10.5" class="anchored" data-anchor-id="sar1-estacional-con-simulación-extendida"><span class="header-section-number">10.5</span> 4. SAR(1) estacional con simulación extendida</h2>
 <p>Simulación con coeficiente 0.8 en rezago 12:</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">sim_sarima</span>(<span class="at">n=</span><span class="dv">144</span>,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">model=</span><span class="fu">list</span>(<span class="at">ar=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">11</span>),<span class="fl">0.8</span>)),</span>
@@ -667,7 +641,6 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>), <span class="at">nc=</span><span class="dv">2</span>))</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1, <span class="at">main=</span><span class="st">"SAR(1) estacional (coef=0.8)"</span>)</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x1, <span class="at">lag.max=</span><span class="dv">36</span>); <span class="fu">pacf</span>(x1, <span class="at">lag.max=</span><span class="dv">36</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -675,10 +648,7 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monthplot</span>(x1); <span class="fu">nsdiffs</span>(x1); <span class="fu">ndiffs</span>(x1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
@@ -694,13 +664,10 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comprobar cercanía a raíz unitaria</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>p   <span class="ot">&lt;-</span> <span class="fu">polynom</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">11</span>), <span class="sc">-</span><span class="fl">0.8</span>))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>roots <span class="ot">&lt;-</span> <span class="fu">solve</span>(p)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(roots)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 1.018769 1.018769 1.018769 1.018769 1.018769 1.018769 1.018769 1.018769
  [9] 1.018769 1.018769 1.018769 1.018769</code></pre>
@@ -712,8 +679,6 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <section id="sarima00111012-y-sarima00101112" class="level2" data-number="10.6">
 <h2 data-number="10.6" class="anchored" data-anchor-id="sarima00111012-y-sarima00101112"><span class="header-section-number">10.6</span> 5. SARIMA(0,0,1)(1,1,0)[12] y SARIMA(0,0,1)(0,1,1)[12]</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">sim_sarima</span>(<span class="at">n=</span><span class="dv">144</span>,</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">model=</span><span class="fu">list</span>(<span class="at">sar=</span><span class="fl">0.8</span>, <span class="at">ma=</span><span class="sc">-</span><span class="fl">0.5</span>, <span class="at">iorder=</span><span class="dv">0</span>, <span class="at">siorder=</span><span class="dv">1</span>, <span class="at">nseasons=</span><span class="dv">12</span>),</span>
@@ -722,7 +687,6 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>), <span class="at">nc=</span><span class="dv">2</span>))</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x3, <span class="at">main=</span><span class="st">"SARIMA(0,0,1)(1,1,0)[12]"</span>)</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x3, <span class="at">lag.max=</span><span class="dv">48</span>); <span class="fu">pacf</span>(x3, <span class="at">lag.max=</span><span class="dv">48</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -730,19 +694,13 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monthplot</span>(x3); <span class="fu">nsdiffs</span>(x3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diferencia estacional</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>Dx3 <span class="ot">&lt;-</span> <span class="fu">diff</span>(x3, <span class="at">lag=</span><span class="dv">12</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>), <span class="at">nc=</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -750,11 +708,8 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Dx3, <span class="at">main=</span><span class="st">"Diferencia estacional"</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(Dx3, <span class="at">lag.max=</span><span class="dv">36</span>); <span class="fu">pacf</span>(Dx3, <span class="at">lag.max=</span><span class="dv">36</span>); <span class="fu">monthplot</span>(Dx3); <span class="fu">nsdiffs</span>(Dx3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -765,11 +720,8 @@ B^s)^D X_t ;=;\Theta(B^s),\theta(B),w_t. \]</span></p>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparación de modelos en original vs diferenciado</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(x3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: x3 
 ARIMA(0,0,1)(1,1,0)[12] with drift 
@@ -782,10 +734,7 @@ s.e.   0.0863  0.0568   0.0118
 sigma^2 = 0.9426:  log likelihood = -187.14
 AIC=382.28   AICc=382.6   BIC=393.81</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(Dx3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: Dx3 
 ARIMA(0,0,1)(0,1,0)[12] 
@@ -807,8 +756,6 @@ AIC=348.35   AICc=348.45   BIC=353.93</code></pre>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>x4 <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">sim_sarima</span>(<span class="at">n=</span><span class="dv">144</span>,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">model=</span><span class="fu">list</span>(<span class="at">ma=</span><span class="fl">0.6</span>, <span class="at">sma=</span><span class="fl">0.5</span>, <span class="at">iorder=</span><span class="dv">0</span>, <span class="at">siorder=</span><span class="dv">1</span>, <span class="at">nseasons=</span><span class="dv">12</span>),</span>
@@ -817,7 +764,6 @@ AIC=348.35   AICc=348.45   BIC=353.93</code></pre>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>), <span class="at">nc=</span><span class="dv">2</span>))</span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x4, <span class="at">main=</span><span class="st">"SARIMA(0,0,1)(0,1,1)[12]"</span>)</span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x4, <span class="at">lag.max=</span><span class="dv">48</span>); <span class="fu">pacf</span>(x4, <span class="at">lag.max=</span><span class="dv">48</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -825,13 +771,10 @@ AIC=348.35   AICc=348.45   BIC=353.93</code></pre>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diferencia estacional</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>Dx4 <span class="ot">&lt;-</span> <span class="fu">diff</span>(x4, <span class="at">lag=</span><span class="dv">12</span>)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Dx4, <span class="at">main=</span><span class="st">"Diferencia estacional"</span>)</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(Dx4, <span class="at">lag.max=</span><span class="dv">36</span>); <span class="fu">pacf</span>(Dx4, <span class="at">lag.max=</span><span class="dv">48</span>); <span class="fu">nsdiffs</span>(Dx4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -842,11 +785,8 @@ AIC=348.35   AICc=348.45   BIC=353.93</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modelos sugeridos</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(x4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: x4 
 ARIMA(0,0,1)(0,1,1)[12] 
@@ -859,10 +799,7 @@ s.e.  0.0633  0.0831
 sigma^2 = 1.031:  log likelihood = -190.01
 AIC=386.02   AICc=386.21   BIC=394.67</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(Dx4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: Dx4 
 ARIMA(0,0,1)(0,0,1)[12] with zero mean 

@@ -436,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ARMA - Box-Jenkins</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ARMA - Box-Jenkins</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -462,21 +462,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="limpieza-de-entorno-y-carga-de-librerías" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="limpieza-de-entorno-y-carga-de-librerías"><span class="header-section-number">8.1</span> Limpieza de entorno y carga de librerías</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="at">all =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Registered S3 method overwritten by 'quantmod':
   method            from
   as.zoo.data.frame zoo </code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TSA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Registered S3 methods overwritten by 'TSA':
   method       from    
@@ -497,34 +491,25 @@ Attaching package: 'TSA'</code></pre>
 
     tar</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="definir-directorio-y-leer-datos" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="definir-directorio-y-leer-datos"><span class="header-section-number">8.2</span> Definir directorio y leer datos</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cambiar "\" por "/" en la ruta</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd("C:/Users/cubid/Desktop/QUARTO - MATERIAS UNAL/9 SERIES DE TIEMPO/Lesson04")</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Leer datos desde Excel</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Programa_2_datos.xls"</span>, <span class="at">sheet =</span> <span class="st">"Datos"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 </section>
 <section id="preparación-de-la-serie-y-gráfica-inicial" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="preparación-de-la-serie-y-gráfica-inicial"><span class="header-section-number">8.3</span> Preparación de la serie y gráfica inicial</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>yt <span class="ot">&lt;-</span> <span class="fu">ts</span>(datos[,<span class="dv">2</span>], <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1998</span>, <span class="dv">12</span>), <span class="at">frequency =</span> <span class="dv">12</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(yt, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">main =</span> <span class="st">"Serie yt"</span>, <span class="at">xlab =</span> <span class="st">"Tiempo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -537,11 +522,8 @@ Attaching package: 'TSA'</code></pre>
 <section id="transformación-logarítmica-para-estabilizar-varianza" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="transformación-logarítmica-para-estabilizar-varianza"><span class="header-section-number">8.4</span> Transformación logarítmica para estabilizar varianza</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ln.yt <span class="ot">&lt;-</span> <span class="fu">log</span>(yt)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ln.yt, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">main =</span> <span class="st">"Serie en log"</span>, <span class="at">xlab =</span> <span class="st">"Tiempo"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">3.5</span>,<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -554,10 +536,7 @@ Attaching package: 'TSA'</code></pre>
 <section id="prueba-de-raíz-unitaria-adf" class="level2" data-number="8.5">
 <h2 data-number="8.5" class="anchored" data-anchor-id="prueba-de-raíz-unitaria-adf"><span class="header-section-number">8.5</span> Prueba de raíz unitaria (ADF)</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(ln.yt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -565,10 +544,7 @@ Attaching package: 'TSA'</code></pre>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(ln.yt)  <span class="co"># Ho: no estacionaria, p-valor&gt;0.05 =&gt; no rechaza Ho</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Augmented Dickey-Fuller Test
@@ -582,18 +558,12 @@ alternative hypothesis: stationary</code></pre>
 <section id="primera-diferencia-para-estacionariedad" class="level2" data-number="8.6">
 <h2 data-number="8.6" class="anchored" data-anchor-id="primera-diferencia-para-estacionariedad"><span class="header-section-number">8.6</span> Primera diferencia para estacionariedad</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ytd <span class="ot">&lt;-</span> <span class="fu">diff</span>(ln.yt, <span class="dv">1</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ytd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.000917174</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ytd, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">main =</span> <span class="st">"Serie en primera diferencia"</span>, <span class="at">xlab =</span> <span class="st">"Tiempo"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.08</span>,<span class="fl">0.08</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -601,10 +571,7 @@ alternative hypothesis: stationary</code></pre>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(ytd)  <span class="co"># p-valor&lt;0.05 =&gt; rechaza Ho</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Augmented Dickey-Fuller Test
@@ -618,12 +585,9 @@ alternative hypothesis: stationary</code></pre>
 <section id="identificación-acf-y-pacf" class="level2" data-number="8.7">
 <h2 data-number="8.7" class="anchored" data-anchor-id="identificación-acf-y-pacf"><span class="header-section-number">8.7</span> Identificación: ACF y PACF</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(ytd)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(ytd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -636,10 +600,7 @@ alternative hypothesis: stationary</code></pre>
 <section id="selección-de-modelo-armapq" class="level2" data-number="8.8">
 <h2 data-number="8.8" class="anchored" data-anchor-id="selección-de-modelo-armapq"><span class="header-section-number">8.8</span> Selección de modelo ARMA(p,q)</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eacf</span>(ytd)                  <span class="co"># sugerencia ARMA(3,0)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>AR/MA
   0 1 2 3 4 5 6 7 8 9 10 11 12 13
@@ -652,10 +613,7 @@ alternative hypothesis: stationary</code></pre>
 6 x x x o o o o o o o o  o  o  o 
 7 x x x x o o o o o o o  o  o  o </code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(ytd, <span class="at">trace=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  ARIMA(2,0,2)(1,0,1)[12] with non-zero mean : -798.6118
@@ -712,11 +670,8 @@ AIC=-811.84   AICc=-811.53   BIC=-800.16</code></pre>
 <section id="estimación-de-dos-modelos" class="level2" data-number="8.9">
 <h2 data-number="8.9" class="anchored" data-anchor-id="estimación-de-dos-modelos"><span class="header-section-number">8.9</span> Estimación de dos modelos</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">Arima</span>(ytd, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">include.mean =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: ytd 
 ARIMA(3,0,0) with zero mean 
@@ -735,11 +690,8 @@ Training set -0.0003684491 0.01209189 0.009562996 39.69704 126.5415 0.4781506
                     ACF1
 Training set -0.01678247</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">Arima</span>(ytd, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">include.mean =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: ytd 
 ARIMA(2,0,1) with zero mean 
@@ -763,13 +715,10 @@ Training set 0.08053776</code></pre>
 <section id="diagnóstico-del-modelo-1" class="level2" data-number="8.10">
 <h2 data-number="8.10" class="anchored" data-anchor-id="diagnóstico-del-modelo-1"><span class="header-section-number">8.10</span> Diagnóstico del modelo 1</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>at_est <span class="ot">&lt;-</span> <span class="fu">residuals</span>(mod1)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuales y residuales estandarizados</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(at_est, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.1</span>,<span class="fl">0.1</span>), <span class="at">main =</span> <span class="st">"Residuales de mod1"</span>); <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -777,14 +726,11 @@ Training set 0.08053776</code></pre>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>))</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">rstandard</span>(mod1), <span class="at">type =</span> <span class="st">"o"</span>, <span class="at">ylab =</span> <span class="st">"Residuales estandarizados"</span>); </span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(at_est, <span class="at">lag.max =</span> <span class="dv">36</span>)</span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(at_est, <span class="at">lag.max =</span> <span class="dv">36</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -797,13 +743,10 @@ Training set 0.08053776</code></pre>
 <section id="prueba-de-ljung-box" class="level2" data-number="8.11">
 <h2 data-number="8.11" class="anchored" data-anchor-id="prueba-de-ljung-box"><span class="header-section-number">8.11</span> Prueba de Ljung-Box</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Para varios rezagos</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>Ljung_Box <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">18</span>, <span class="cf">function</span>(i) <span class="fu">Box.test</span>(at_est, <span class="at">lag =</span> i, <span class="at">type =</span> <span class="st">"Ljung"</span>)<span class="sc">$</span>p.value)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Ljung_Box) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">Rezago =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">18</span>, <span class="at">p.valor =</span> <span class="fu">round</span>(Ljung_Box, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Rezago p.valor
 1       1  0.8426
@@ -825,11 +768,8 @@ Training set 0.08053776</code></pre>
 17     17  0.9736
 18     18  0.9789</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">18</span>, Ljung_Box, <span class="at">type=</span><span class="st">"b"</span>, <span class="at">main=</span><span class="st">"Prueba Ljung-Box (H0: independencia)"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fl">0.05</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -839,11 +779,8 @@ Training set 0.08053776</code></pre>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tsdiag hace diagnóstico completo</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tsdiag</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -856,11 +793,8 @@ Training set 0.08053776</code></pre>
 <section id="normalidad-de-residuales" class="level2" data-number="8.12">
 <h2 data-number="8.12" class="anchored" data-anchor-id="normalidad-de-residuales"><span class="header-section-number">8.12</span> Normalidad de residuales</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nortest)</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ad.test</span>(at_est)      <span class="co"># p-valor&gt;0.05: no rechaza normalidad</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
@@ -868,10 +802,7 @@ Training set 0.08053776</code></pre>
 data:  at_est
 A = 0.22546, p-value = 0.8166</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(at_est) <span class="co"># idem</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -879,10 +810,7 @@ A = 0.22546, p-value = 0.8166</code></pre>
 data:  at_est
 W = 0.99377, p-value = 0.8164</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(at_est); <span class="fu">qqline</span>(at_est, <span class="at">col =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -890,10 +818,7 @@ W = 0.99377, p-value = 0.8164</code></pre>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(at_est, <span class="at">main =</span> <span class="st">"Histograma de residuales mod1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -906,8 +831,6 @@ W = 0.99377, p-value = 0.8164</code></pre>
 <section id="función-cusum-y-cusumq" class="level2" data-number="8.13">
 <h2 data-number="8.13" class="anchored" data-anchor-id="función-cusum-y-cusumq"><span class="header-section-number">8.13</span> Función CUSUM y CUSUMQ</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>cucuq <span class="ot">&lt;-</span> <span class="cf">function</span>(x, nivel) {</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  A <span class="ot">&lt;-</span> <span class="fl">0.948</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  N <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
@@ -927,7 +850,6 @@ W = 0.99377, p-value = 0.8164</code></pre>
 <span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cucuq</span>(at_est, <span class="at">nivel =</span> <span class="fl">0.11848</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -940,11 +862,8 @@ W = 0.99377, p-value = 0.8164</code></pre>
 <section id="evaluación-predictiva-dentro-y-fuera-de-muestra" class="level2" data-number="8.14">
 <h2 data-number="8.14" class="anchored" data-anchor-id="evaluación-predictiva-dentro-y-fuera-de-muestra"><span class="header-section-number">8.14</span> Evaluación predictiva dentro y fuera de muestra</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dentro de muestra</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: ytd 
 ARIMA(3,0,0) with zero mean 
@@ -963,10 +882,7 @@ Training set -0.0003684491 0.01209189 0.009562996 39.69704 126.5415 0.4781506
                     ACF1
 Training set -0.01678247</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: ytd 
 ARIMA(2,0,1) with zero mean 
@@ -985,8 +901,6 @@ Training set -0.0002526163 0.01258662 0.01008932 37.02357 119.4948 0.5044668
                    ACF1
 Training set 0.08053776</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fuera de muestra</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>datos.evalua <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Programa_2_datos.xls"</span>, <span class="at">sheet =</span> <span class="st">"Evaluar"</span>)</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>yt.eval <span class="ot">&lt;-</span> <span class="fu">ts</span>(datos.evalua[,<span class="dv">2</span>], <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2010</span>, <span class="dv">12</span>), <span class="at">frequency =</span> <span class="dv">12</span>)</span>
@@ -995,15 +909,11 @@ Training set 0.08053776</code></pre>
 <span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>mod2.evalua <span class="ot">&lt;-</span> <span class="fu">Arima</span>(yt.eval, <span class="at">model =</span> mod2)</span>
 <span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(mod1.evalua)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   ME     RMSE      MAE      MPE     MAPE MASE        ACF1
 Training set 39.11233 39.99697 39.11233 42.00275 42.00275  NaN -0.04246928</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(mod2.evalua)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   ME     RMSE      MAE      MPE     MAPE MASE      ACF1
 Training set 31.63266 33.46823 31.63266 34.05565 34.05565  NaN 0.1746239</code></pre>
@@ -1013,8 +923,6 @@ Training set 31.63266 33.46823 31.63266 34.05565 34.05565  NaN 0.1746239</code><
 <section id="pronósticos-con-ggplot2" class="level2" data-number="8.15">
 <h2 data-number="8.15" class="anchored" data-anchor-id="pronósticos-con-ggplot2"><span class="header-section-number">8.15</span> Pronósticos con ggplot2</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Pronóstico de diferencias</span></span>
@@ -1022,7 +930,6 @@ Training set 31.63266 33.46823 31.63266 34.05565 34.05565  NaN 0.1746239</code><
 <span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Arima</span>(<span class="at">order =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">include.mean =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1030,14 +937,11 @@ Training set 31.63266 33.46823 31.63266 34.05565 34.05565  NaN 0.1746239</code><
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pronóstico en niveles</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>ln.yt <span class="sc">%&gt;%</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Arima</span>(<span class="at">order =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">include.mean =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

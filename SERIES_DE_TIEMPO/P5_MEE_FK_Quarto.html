@@ -452,7 +452,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">MEE - Filtro Kalman</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">MEE - Filtro Kalman</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -494,12 +494,9 @@ y_t &amp;= Z\,\omega_t + \varepsilon_t, \quad \varepsilon_t \sim N(0,H),\\
 <section id="definición-del-modelo-ar1-en-espacio-estado" class="level3" data-number="9.1.2">
 <h3 data-number="9.1.2" class="anchored" data-anchor-id="definición-del-modelo-ar1-en-espacio-estado"><span class="header-section-number">9.1.2</span> 2. Definición del modelo AR(1) en espacio-estado</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>phi_inicial    <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sigma2_inicial <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>modAR1 <span class="ot">&lt;-</span> <span class="fu">dlmModARMA</span>(<span class="at">ar =</span> phi_inicial, <span class="at">ma =</span> <span class="cn">NULL</span>, <span class="at">sigma2 =</span> sigma2_inicial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>Aquí <code>dlmModARMA</code> construye matrices <span class="math inline">\(T,\,Z,\,Q,\,H\)</span> internas que representan el AR(1): <span class="math display">\[
 \omega_{t+1} = \phi\,\omega_t + \eta_t,\quad y_t = \omega_t + \varepsilon_t.
@@ -509,13 +506,10 @@ y_t &amp;= Z\,\omega_t + \varepsilon_t, \quad \varepsilon_t \sim N(0,H),\\
 <section id="simulación-de-datos" class="level3" data-number="9.1.3">
 <h3 data-number="9.1.3" class="anchored" data-anchor-id="simulación-de-datos"><span class="header-section-number">9.1.3</span> 3. Simulación de datos</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> phi_inicial), <span class="at">n =</span> <span class="dv">100</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sd =</span> <span class="fu">sqrt</span>(sigma2_inicial))</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(sim_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -523,10 +517,7 @@ y_t &amp;= Z\,\omega_t + \varepsilon_t, \quad \varepsilon_t \sim N(0,H),\\
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(sim_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -541,12 +532,9 @@ y_t &amp;= Z\,\omega_t + \varepsilon_t, \quad \varepsilon_t \sim N(0,H),\\
 <section id="función-de-construcción-para-mee" class="level3" data-number="9.1.4">
 <h3 data-number="9.1.4" class="anchored" data-anchor-id="función-de-construcción-para-mee"><span class="header-section-number">9.1.4</span> 4. Función de construcción para MEE</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>build_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(par) {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dlmModARMA</span>(<span class="at">ar =</span> par[<span class="dv">1</span>], <span class="at">ma =</span> <span class="cn">NULL</span>, <span class="at">sigma2 =</span> par[<span class="dv">2</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>Esta función será llamada por el optimizador de verosimilitud para proponer nuevos parámetros <span class="math inline">\(\phi\)</span> y <span class="math inline">\(\sigma^2\)</span>.</p>
 <hr>
@@ -554,11 +542,8 @@ y_t &amp;= Z\,\omega_t + \varepsilon_t, \quad \varepsilon_t \sim N(0,H),\\
 <section id="estimación-por-máxima-verosimilitud-mee" class="level3" data-number="9.1.5">
 <h3 data-number="9.1.5" class="anchored" data-anchor-id="estimación-por-máxima-verosimilitud-mee"><span class="header-section-number">9.1.5</span> 5. Estimación por Máxima Verosimilitud (MEE)</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">dlmMLE</span>(sim_data, <span class="at">parm =</span> <span class="fu">c</span>(phi_inicial, sigma2_inicial),</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">build =</span> build_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p><code>dlmMLE</code> maximiza la función de verosimilitud evaluada con el filtro de Kalman.</p>
 <hr>
@@ -566,11 +551,8 @@ y_t &amp;= Z\,\omega_t + \varepsilon_t, \quad \varepsilon_t \sim N(0,H),\\
 <section id="extracción-del-modelo-ajustado" class="level3" data-number="9.1.6">
 <h3 data-number="9.1.6" class="anchored" data-anchor-id="extracción-del-modelo-ajustado"><span class="header-section-number">9.1.6</span> 6. Extracción del modelo ajustado</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod_est <span class="ot">&lt;-</span> <span class="fu">build_mod</span>(fit<span class="sc">$</span>par)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mod_est)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>$FF
      [,1]
@@ -602,13 +584,10 @@ $C0
 <section id="filtro-y-suavizador-de-kalman" class="level3" data-number="9.1.7">
 <h3 data-number="9.1.7" class="anchored" data-anchor-id="filtro-y-suavizador-de-kalman"><span class="header-section-number">9.1.7</span> 7. Filtro y suavizador de Kalman</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtro recursivo hasta t</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>filt   <span class="ot">&lt;-</span> <span class="fu">dlmFilter</span>(sim_data, mod_est)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Suavizador usando toda la muestra</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">dlmSmooth</span>(filt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <ul>
 <li><code>filt$m</code> contiene <span class="math inline">\(\hat\omega_{t|t-1}\)</span> (estimación “a priori”).<br>
@@ -620,8 +599,6 @@ $C0
 <section id="visualización-de-estados" class="level3" data-number="9.1.8">
 <h3 data-number="9.1.8" class="anchored" data-anchor-id="visualización-de-estados"><span class="header-section-number">9.1.8</span> 8. Visualización de estados</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estados filtrados en línea continua</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sim_data, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Datos simulados y estados filtrados"</span>)</span>
@@ -629,7 +606,6 @@ $C0
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"Datos simulados"</span>,<span class="st">"Estados filtrados"</span>),</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>), <span class="at">lty=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -637,8 +613,6 @@ $C0
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estados suavizados en línea punteada</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sim_data, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Datos simulados y estados suavizados"</span>)</span>
@@ -646,7 +620,6 @@ $C0
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"Simulación"</span>,<span class="st">"Estados suavizados"</span>),</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>), <span class="at">lty=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

@@ -454,7 +454,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">ACF en AR(p) y MA(q)</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">ACF en AR(p) y MA(q)</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -480,8 +480,6 @@ window.Quarto = {
 <section id="simulación-y-cálculo-de-acf-para-n-500-y-n-50" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="simulación-y-cálculo-de-acf-para-n-500-y-n-50"><span class="header-section-number">5.1</span> Simulación y cálculo de ACF para n = 500 y n = 50</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Serie MA(3) con n = 500</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(<span class="fu">rnorm</span>(<span class="dv">500</span> <span class="sc">+</span> <span class="dv">2</span>), <span class="at">filter =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="at">sides =</span> <span class="dv">2</span>)</span>
@@ -494,7 +492,6 @@ window.Quarto = {
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.ts</span>(x1, <span class="at">main =</span> <span class="st">"MA(3) simulada, n = 500"</span>, <span class="at">xlab =</span> <span class="st">"Tiempo"</span>, <span class="at">ylab =</span> <span class="st">"Valor de la serie"</span>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.ts</span>(x2, <span class="at">main =</span> <span class="st">"MA(3) simulada, n = 50"</span>, <span class="at">xlab =</span> <span class="st">"Tiempo"</span>, <span class="at">ylab =</span> <span class="st">"Valor de la serie"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -519,13 +516,10 @@ window.Quarto = {
 <section id="cálculo-y-comparación-de-acfs-muestrales" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="cálculo-y-comparación-de-acfs-muestrales"><span class="header-section-number">5.3</span> Cálculo y comparación de ACFs muestrales</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ACF muestral comparativa</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x1, <span class="at">lag.max =</span> <span class="dv">20</span>, <span class="at">main =</span> <span class="st">"ACF muestral MA(3), n = 500"</span>, <span class="at">xlab =</span> <span class="st">"Rezago"</span>, <span class="at">ylab =</span> <span class="st">"ACF"</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x2, <span class="at">lag.max =</span> <span class="dv">20</span>, <span class="at">main =</span> <span class="st">"ACF muestral MA(3), n = 50"</span>, <span class="at">xlab =</span> <span class="st">"Rezago"</span>, <span class="at">ylab =</span> <span class="st">"ACF"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -533,8 +527,6 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>acf_x1 <span class="ot">&lt;-</span> <span class="fu">acf</span>(x1, <span class="at">lag.max =</span> <span class="dv">20</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)<span class="sc">$</span>acf</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>acf_x2 <span class="ot">&lt;-</span> <span class="fu">acf</span>(x2, <span class="at">lag.max =</span> <span class="dv">20</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)<span class="sc">$</span>acf</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>rho_teo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">18</span>))</span>
@@ -547,7 +539,6 @@ window.Quarto = {
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  ACF_Teórica       <span class="ot">=</span> <span class="fu">round</span>(rho_teo,  <span class="dv">4</span>)</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Autocorrelaciones, <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Rezago ACF500_Estimada ACF50_Estimada ACF_Teórica
 1      0          1.0000         1.0000      1.0000

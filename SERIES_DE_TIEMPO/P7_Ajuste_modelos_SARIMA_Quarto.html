@@ -461,7 +461,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ajuste SARIMA (Completo)</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Ajuste SARIMA (Completo)</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -491,8 +491,6 @@ window.Quarto = {
 <section id="librerías-necesarias" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="librerías-necesarias"><span class="header-section-number">12.1</span> Librerías necesarias</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(urca)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
@@ -500,7 +498,6 @@ window.Quarto = {
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(uroot)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fUnitRoots)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aTSA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <hr>
 </section>
@@ -511,8 +508,6 @@ La prueba ADF considera: <span class="math display">\[
 \Delta X_t = \rho\,X_{t-1} + \sum_{j=1}^p\beta_j\,\Delta X_{t-j} + e_t.
 \]</span></p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raiz Unitaria</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Tlength <span class="ot">=</span> <span class="dv">200</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>arimaej_raiz_unit <span class="ot">=</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ar =</span> <span class="fl">0.7</span>, <span class="at">ma =</span> <span class="fl">0.6</span>),</span>
@@ -522,7 +517,6 @@ La prueba ADF considera: <span class="math display">\[
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(arimaej_raiz_unit)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(arimaej_raiz_unit)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(arimaej_raiz_unit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -530,24 +524,18 @@ La prueba ADF considera: <span class="math display">\[
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ho: Raiz unitaria (no estacionaria) vs Ha: Estacionariedad</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">adf.test</span>(arimaej_raiz_unit)       <span class="co"># p.valor&gt;0.05 ⇒ no rechaza Ho</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Augmented Dickey-Fuller Test
 
 data:  arimaej_raiz_unit
-Dickey-Fuller = -2.7488, Lag order = 5, p-value = 0.2625
+Dickey-Fuller = -2.4277, Lag order = 5, p-value = 0.3969
 alternative hypothesis: stationary</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba KPSS (Ho: estacionariedad vs Ha: raiz unitaria)</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">kpss.test</span>(arimaej_raiz_unit)      <span class="co"># p.valor&lt;0.05 ⇒ rechaza estacionariedad</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in tseries::kpss.test(arimaej_raiz_unit): p-value smaller than printed
 p-value</code></pre>
@@ -557,20 +545,17 @@ p-value</code></pre>
     KPSS Test for Level Stationarity
 
 data:  arimaej_raiz_unit
-KPSS Level = 3.6651, Truncation lag parameter = 4, p-value = 0.01</code></pre>
+KPSS Level = 3.478, Truncation lag parameter = 4, p-value = 0.01</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba Phillips-Perron (Ho: raiz unitaria vs Ha: estacionariedad)</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">pp.test</span>(arimaej_raiz_unit)        <span class="co"># p.valor&gt;0.05 ⇒ no rechaza Ho</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Phillips-Perron Unit Root Test
 
 data:  arimaej_raiz_unit
-Dickey-Fuller Z(alpha) = -4.749, Truncation lag parameter = 4, p-value
-= 0.8431
+Dickey-Fuller Z(alpha) = -8.0549, Truncation lag parameter = 4, p-value
+= 0.6553
 alternative hypothesis: stationary</code></pre>
 </div>
 </div>
@@ -584,12 +569,9 @@ Las pruebas ADF y PP no rechazan raíz unitaria, mientras KPSS rechaza estaciona
 <h3 data-number="12.3.1" class="anchored" data-anchor-id="estabilizar-varianza"><span class="header-section-number">12.3.1</span> 2.1 Estabilizar varianza</h3>
 <p>Box–Cox indica <span class="math inline">\(\lambda\approx0\)</span> ⇒ aplicar <span class="math inline">\(\log\)</span>:</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"AirPassengers"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(AirPassengers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -597,28 +579,19 @@ Las pruebas ADF y PP no rechazan raíz unitaria, mientras KPSS rechaza estaciona
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>forecast<span class="sc">::</span><span class="fu">BoxCox.lambda</span>(AirPassengers, <span class="at">method=</span><span class="st">"guerrero"</span>, <span class="at">lower=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.102259e-05</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>forecast<span class="sc">::</span><span class="fu">BoxCox.lambda</span>(AirPassengers, <span class="at">method=</span><span class="st">"loglik"</span>,   <span class="at">lower=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>logAirP <span class="ot">=</span> <span class="fu">log</span>(AirPassengers)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(AirPassengers, <span class="at">main=</span><span class="st">"Original"</span>)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(logAirP,      <span class="at">main=</span><span class="st">"Logaritmo natural"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -631,12 +604,9 @@ Las pruebas ADF y PP no rechazan raíz unitaria, mientras KPSS rechaza estaciona
 <section id="detectar-raíces-unitarias-regulares-y-estacionales" class="level3" data-number="12.3.2">
 <h3 data-number="12.3.2" class="anchored" data-anchor-id="detectar-raíces-unitarias-regulares-y-estacionales"><span class="header-section-number">12.3.2</span> 2.2 Detectar raíces unitarias regulares y estacionales</h3>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(logAirP, <span class="at">lag.max =</span> <span class="dv">60</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(logAirP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -644,11 +614,8 @@ Las pruebas ADF y PP no rechazan raíz unitaria, mientras KPSS rechaza estaciona
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ADF con drift y tendencia</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">adf.test</span>(logAirP)     <span class="co"># p.valor&gt;=0.01 ⇒ no rechaza Ho</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in tseries::adf.test(logAirP): p-value smaller than printed p-value</code></pre>
 </div>
@@ -660,11 +627,8 @@ data:  logAirP
 Dickey-Fuller = -6.4215, Lag order = 5, p-value = 0.01
 alternative hypothesis: stationary</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># KPSS (Ho: estacionariedad)</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">kpss.test</span>(logAirP)    <span class="co"># p.valor&lt;0.05 ⇒ rechaza estacionariedad</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in tseries::kpss.test(logAirP): p-value smaller than printed p-value</code></pre>
 </div>
@@ -675,11 +639,8 @@ alternative hypothesis: stationary</code></pre>
 data:  logAirP
 KPSS Level = 2.8287, Truncation lag parameter = 4, p-value = 0.01</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PP (Ho: raiz unitaria)</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">pp.test</span>(logAirP)      <span class="co"># p.valor&gt;=0.01 ⇒ no rechaza Ho</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in tseries::pp.test(logAirP): p-value smaller than printed p-value</code></pre>
 </div>
@@ -692,11 +653,8 @@ Dickey-Fuller Z(alpha) = -47.933, Truncation lag parameter = 4, p-value
 = 0.01
 alternative hypothesis: stationary</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ADF aumentado</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>aTSA<span class="sc">::</span><span class="fu">adf.test</span>(logAirP, <span class="at">nlag =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Augmented Dickey-Fuller Test 
 alternative: stationary 
@@ -736,18 +694,12 @@ Note: in fact, p.value = 0.01 means p.value &lt;= 0.01 </code></pre>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Decisión de diferencias</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ndiffs</span>(logAirP)   <span class="co"># d = 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nsdiffs</span>(logAirP)  <span class="co"># D = 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
@@ -760,14 +712,11 @@ Se requieren una diferencia regular (<span class="math inline">\(d=1\)</span>) y
 <section id="parte-3-diferencias-y-verificación" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="parte-3-diferencias-y-verificación"><span class="header-section-number">12.4</span> Parte 3: Diferencias y verificación</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diferencia regular</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>dlogAirPass <span class="ot">=</span> <span class="fu">diff</span>(logAirP)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>))</span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(AirPassengers); <span class="fu">plot</span>(logAirP); <span class="fu">plot</span>(dlogAirPass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -775,12 +724,9 @@ Se requieren una diferencia regular (<span class="math inline">\(d=1\)</span>) y
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(dlogAirPass, <span class="at">lag.max =</span> <span class="dv">48</span>)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(dlogAirPass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -788,10 +734,7 @@ Se requieren una diferencia regular (<span class="math inline">\(d=1\)</span>) y
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>aTSA<span class="sc">::</span><span class="fu">adf.test</span>(dlogAirPass, <span class="at">nlag =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Augmented Dickey-Fuller Test 
 alternative: stationary 
@@ -850,14 +793,11 @@ Type 3: with drift and trend
 ---- 
 Note: in fact, p.value = 0.01 means p.value &lt;= 0.01 </code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diferencia estacional</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>d_dlogAirPass <span class="ot">=</span> <span class="fu">diff</span>(dlogAirPass, <span class="dv">12</span>)</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">1</span>))</span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(AirPassengers); <span class="fu">plot</span>(logAirP); <span class="fu">plot</span>(dlogAirPass); <span class="fu">plot</span>(d_dlogAirPass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -865,12 +805,9 @@ Note: in fact, p.value = 0.01 means p.value &lt;= 0.01 </code></pre>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(d_dlogAirPass, <span class="at">lag.max =</span> <span class="dv">50</span>)</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(d_dlogAirPass, <span class="at">lag.max =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -878,10 +815,7 @@ Note: in fact, p.value = 0.01 means p.value &lt;= 0.01 </code></pre>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>aTSA<span class="sc">::</span><span class="fu">adf.test</span>(d_dlogAirPass, <span class="at">nlag =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Augmented Dickey-Fuller Test 
 alternative: stationary 
@@ -949,8 +883,6 @@ Tras <span class="math inline">\(d=1, D=1\)</span>, la serie estacionariza: ACF 
 <h2 data-number="12.5" class="anchored" data-anchor-id="parte-4-ajuste-de-posibles-modelos-sarima"><span class="header-section-number">12.5</span> Parte 4: Ajuste de posibles modelos SARIMA</h2>
 <p>Se prueban tres modelos con transformación <span class="math inline">\(\lambda=0\)</span>:</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) ARIMA(1,1,1)x(0,1,1)[12]</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>Mod1 <span class="ot">=</span> forecast<span class="sc">::</span><span class="fu">Arima</span>(</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  AirPassengers,</span>
@@ -979,7 +911,6 @@ Tras <span class="math inline">\(d=1, D=1\)</span>, la serie estacionariza: ACF 
 <span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>Mod2; Mod3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: AirPassengers 
 ARIMA(0,1,1)(0,1,1)[12] 
@@ -1014,11 +945,8 @@ Los criterios AIC/BIC prefieren <strong>Mod2</strong>: ARIMA(0,1,1)x(0,1,1)[12].
 <section id="parte-5-diagnóstico-de-mod2" class="level2" data-number="12.6">
 <h2 data-number="12.6" class="anchored" data-anchor-id="parte-5-diagnóstico-de-mod2"><span class="header-section-number">12.6</span> Parte 5: Diagnóstico de Mod2</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>at_est <span class="ot">&lt;-</span> <span class="fu">residuals</span>(Mod2)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tsdiag</span>(Mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1026,18 +954,12 @@ Los criterios AIC/BIC prefieren <strong>Mod2</strong>: ARIMA(0,1,1)x(0,1,1)[12].
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalidad de residuos</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car); <span class="fu">library</span>(nortest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: carData</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ad.test</span>(at_est); <span class="fu">shapiro.test</span>(at_est)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
@@ -1052,11 +974,8 @@ A = 0.68703, p-value = 0.07132</code></pre>
 data:  at_est
 W = 0.98637, p-value = 0.1674</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(at_est, <span class="at">freq=</span><span class="cn">FALSE</span>)</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(at_est), <span class="at">col=</span><span class="st">"red"</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1064,10 +983,7 @@ W = 0.98637, p-value = 0.1674</code></pre>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(at_est); <span class="fu">qqline</span>(at_est, <span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1083,8 +999,6 @@ Residuos no muestran autocorrelación ni alejados de normalidad ⇒ modelo adecu
 <section id="parte-6-cusum-y-cusumq" class="level2" data-number="12.7">
 <h2 data-number="12.7" class="anchored" data-anchor-id="parte-6-cusum-y-cusumq"><span class="header-section-number">12.7</span> Parte 6: CUSUM y CUSUMQ</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>cum  <span class="ot">=</span> <span class="fu">cumsum</span>(at_est)<span class="sc">/</span><span class="fu">sd</span>(at_est)</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>N    <span class="ot">=</span> <span class="fu">length</span>(at_est)</span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>cumq <span class="ot">=</span> <span class="fu">cumsum</span>(at_est<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">sum</span>(at_est<span class="sc">^</span><span class="dv">2</span>)</span>
@@ -1099,7 +1013,6 @@ Residuos no muestran autocorrelación ni alejados de normalidad ⇒ modelo adecu
 <span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
 <span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cum,  <span class="at">type=</span><span class="st">"l"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="fu">min</span>(LI),<span class="fu">max</span>(LS)), <span class="at">main=</span><span class="st">"CUSUM"</span>);  <span class="fu">lines</span>(LS, <span class="at">col=</span><span class="st">"red"</span>); <span class="fu">lines</span>(LI, <span class="at">col=</span><span class="st">"red"</span>)</span>
 <span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cumq, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">main=</span><span class="st">"CUSUMSQ"</span>); <span class="fu">lines</span>(LQS, <span class="at">col=</span><span class="st">"red"</span>); <span class="fu">lines</span>(LQI, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1116,12 +1029,9 @@ Residuos no muestran autocorrelación ni alejados de normalidad ⇒ modelo adecu
 <section id="parte-7-pronóstico" class="level2" data-number="12.8">
 <h2 data-number="12.8" class="anchored" data-anchor-id="parte-7-pronóstico"><span class="header-section-number">12.8</span> Parte 7: Pronóstico</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>pronosticos12 <span class="ot">=</span> forecast<span class="sc">::</span><span class="fu">forecast</span>(Mod2, <span class="at">h=</span><span class="dv">12</span>, <span class="at">level=</span><span class="fl">0.95</span>)</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pronosticos12)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1129,14 +1039,11 @@ Residuos no muestran autocorrelación ni alejados de normalidad ⇒ modelo adecu
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Con ggplot2</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>AirPassengers <span class="sc">%&gt;%</span></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  forecast<span class="sc">::</span><span class="fu">Arima</span>(<span class="at">order=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">seasonal=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">lambda=</span><span class="dv">0</span>, <span class="at">method=</span><span class="st">"ML"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  forecast<span class="sc">::</span><span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">12</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

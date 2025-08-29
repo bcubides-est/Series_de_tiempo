@@ -13,7 +13,7 @@ book:
   sidebar:
     tools:
     - icon: globe
-      href: https://bcubides-est.github.io/website/
+      href: https://bcubides-est.github.io/website/inicio.html
       text: "Ir a mi web"
 
     - icon: download
@@ -44,7 +44,7 @@ format:
       light: cerulean #simplex 
       dark: cyborg
     css: custom.css
-    code-fold: true
+    code-fold: false
     toc-collapse: true  # Listas desplegables contraídas por defecto
     toc-depth: 2
     execute:

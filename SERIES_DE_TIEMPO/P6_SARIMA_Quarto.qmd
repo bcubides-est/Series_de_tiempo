@@ -9,13 +9,6 @@ code-tools: true
 lightbox: true
 self-contained: false  
 ---
-
-```{r, fig.width=20, fig.height=5, out.width="100%", echo=TRUE, results='hide', message=FALSE, warning=FALSE}
-# 
-#setwd("C:/Users/cubid/Desktop/QUARTO - MATERIAS UNAL/9 SERIES DE TIEMPO/Lesson01")
-
-```
-
 ## Ejercicio de Simulación SARIMA
 
 En esta práctica simulamos distintos procesos estacionales para identificar componentes SARIMA.\

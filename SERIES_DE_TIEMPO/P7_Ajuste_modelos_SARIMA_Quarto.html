@@ -339,7 +339,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">SERIES DE TIEMPO</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://bcubides-est.github.io/website/" title="Ir a mi web" class="quarto-navigation-tool px-1" aria-label="Ir a mi web"><i class="bi bi-globe"></i></a>
+    <a href="https://bcubides-est.github.io/website/inicio.html" title="Ir a mi web" class="quarto-navigation-tool px-1" aria-label="Ir a mi web"><i class="bi bi-globe"></i></a>
     <a href="javascript:window.print()" title="Descargar (PDF)" class="quarto-navigation-tool px-1" aria-label="Descargar (PDF)"><i class="bi bi-download"></i></a>
     <a href="https://github.com/bcubides-est/Series_de_tiempo" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -531,7 +531,7 @@ La prueba ADF considera: <span class="math display">\[
     Augmented Dickey-Fuller Test
 
 data:  arimaej_raiz_unit
-Dickey-Fuller = -1.6933, Lag order = 5, p-value = 0.7046
+Dickey-Fuller = -2.0267, Lag order = 5, p-value = 0.5649
 alternative hypothesis: stationary</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba KPSS (Ho: estacionariedad vs Ha: raiz unitaria)</span></span>
@@ -545,7 +545,7 @@ p-value</code></pre>
     KPSS Test for Level Stationarity
 
 data:  arimaej_raiz_unit
-KPSS Level = 2.2893, Truncation lag parameter = 4, p-value = 0.01</code></pre>
+KPSS Level = 3.2643, Truncation lag parameter = 4, p-value = 0.01</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prueba Phillips-Perron (Ho: raiz unitaria vs Ha: estacionariedad)</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tseries<span class="sc">::</span><span class="fu">pp.test</span>(arimaej_raiz_unit)        <span class="co"># p.valor&gt;0.05 ⇒ no rechaza Ho</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -554,8 +554,8 @@ KPSS Level = 2.2893, Truncation lag parameter = 4, p-value = 0.01</code></pre>
     Phillips-Perron Unit Root Test
 
 data:  arimaej_raiz_unit
-Dickey-Fuller Z(alpha) = -4.1139, Truncation lag parameter = 4, p-value
-= 0.8791
+Dickey-Fuller Z(alpha) = -3.5774, Truncation lag parameter = 4, p-value
+= 0.9076
 alternative hypothesis: stationary</code></pre>
 </div>
 </div>
